@@ -18,6 +18,27 @@ const starterPrompts = [
   "Similar items from an image",
 ];
 
+function normalizePrompt(prompt: string) {
+  return prompt.trim().toLowerCase();
+}
+
+function isConversationOnlyPrompt(prompt: string) {
+  const normalized = normalizePrompt(prompt);
+  return [
+    "hi",
+    "hello",
+    "hey",
+    "how are you",
+    "how are you?",
+    "thanks",
+    "thank you",
+    "what can you do",
+    "what can you do?",
+    "who are you",
+    "who are you?",
+  ].includes(normalized);
+}
+
 function AssistantAvatar() {
   return (
     <div className="muse-orb h-10 w-10 rounded-2xl" />
@@ -39,7 +60,8 @@ export function CommerceAgent() {
   const [input, setInput] = useState("");
   const [selectedImage, setSelectedImage] = useState<string>();
   const [selectedImageName, setSelectedImageName] = useState<string>();
-  const [reply, setReply] = useState<ChatResponse | null>(null);
+  const [activeRecommendations, setActiveRecommendations] = useState(() => catalog.slice(0, 3));
+  const [activeImageSummary, setActiveImageSummary] = useState<string | undefined>();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -127,7 +149,15 @@ export function CommerceAgent() {
         throw new Error("error" in data ? data.error : "Request failed.");
       }
 
-      setReply(data);
+      const shouldRefreshRecommendations =
+        Boolean(selectedImage) ||
+        !isConversationOnlyPrompt(prompt) ||
+        data.mode !== "general";
+
+      if (shouldRefreshRecommendations && data.recommendations.length > 0) {
+        setActiveRecommendations(data.recommendations);
+        setActiveImageSummary(data.imageSummary);
+      }
       setMessages((current) => [...current, { role: "assistant", content: data.answer }]);
     } catch (caughtError) {
       const message =
@@ -163,7 +193,7 @@ export function CommerceAgent() {
     }
   }
 
-  const displayedRecommendations = reply?.recommendations ?? catalog.slice(0, 3);
+  const displayedRecommendations = activeRecommendations;
   const hasUserStartedConversation = messages.some((message) => message.role === "user");
 
   return (
@@ -340,16 +370,16 @@ export function CommerceAgent() {
                 <div>
                   <p className="text-sm font-semibold text-slate-900">Recommended picks</p>
                   <p className="mt-1 text-sm text-slate-500">
-                    {reply?.imageSummary
+                    {activeImageSummary
                       ? "Matched from your uploaded image and the current conversation."
-                      : "Updated from the current conversation."}
+                      : "Updated from the most recent shopping request."}
                   </p>
                 </div>
               </div>
 
-              {reply?.imageSummary ? (
+              {activeImageSummary ? (
                 <p className="mt-4 rounded-[18px] bg-white px-4 py-3 text-sm leading-6 text-slate-600">
-                  Visual cue: {reply.imageSummary}
+                  Visual cue: {activeImageSummary}
                 </p>
               ) : null}
 
