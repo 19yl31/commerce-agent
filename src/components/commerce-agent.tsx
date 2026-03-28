@@ -43,6 +43,7 @@ export function CommerceAgent() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const messagesContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const openAssistant = () => setIsOpen(true);
@@ -52,6 +53,18 @@ export function CommerceAgent() {
       window.removeEventListener("open-shopping-assistant", openAssistant);
     };
   }, []);
+
+  useEffect(() => {
+    const container = messagesContainerRef.current;
+    if (!container) {
+      return;
+    }
+
+    container.scrollTo({
+      top: container.scrollHeight,
+      behavior: "smooth",
+    });
+  }, [messages, loading, error, isOpen]);
 
   async function fileToDataUrl(file: File) {
     return await new Promise<string>((resolve, reject) => {
@@ -204,7 +217,10 @@ export function CommerceAgent() {
                 </div>
               ) : null}
 
-              <div className="min-h-0 flex-1 space-y-3 overflow-y-auto bg-white px-5 py-4">
+              <div
+                ref={messagesContainerRef}
+                className="min-h-0 flex-1 space-y-3 overflow-y-auto bg-white px-5 py-4"
+              >
                 {messages.map((message, index) => (
                   <div
                     key={`${message.role}-${index}`}
