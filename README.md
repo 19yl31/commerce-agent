@@ -8,7 +8,7 @@ This project is built around one assistant, `Muse`, that handles all three requi
 - Text-based product recommendation
 - Image-based product search
 
-The storefront is presented as a small fashion brand, `Avenoir`, with a predefined catalog. Rather than making the entire page a chatbot, the agent is embedded as a floating assistant in the bottom-right corner so shopping remains the primary experience and AI remains an assistive layer.
+The storefront is presented as a fictional fashion brand, `Avenoir`, with a predefined catalog. Rather than making the entire page a chatbot, the agent is embedded as a floating assistant in the bottom-right corner so shopping remains the primary experience and AI remains an assistive layer.
 
 ## Overview
 
@@ -28,7 +28,7 @@ This was a deliberate UX decision so the experience feels closer to a real comme
 
 ### Storefront
 
-The landing page is a lightweight fashion storefront for `Avenoir`, with curated sections and a visible catalog. The goal is to make the product context legible before the user ever opens the AI.
+The landing page is a lightweight fashion storefront for `Avenoir`, a fictional demo brand created for this exercise, with curated sections and a visible catalog. The goal is to make the product context legible before the user ever opens the AI.
 
 ### Muse assistant
 
@@ -60,7 +60,7 @@ If reviewing this repository through GitHub only, the screenshots below show the
 ## Demo
 
 Video walkthrough:
-Add your demo link here after uploading the recording.
+[Watch the demo on YouTube](https://youtu.be/r6iBArBdHIU)
 
 ### 1. Entry point for the AI assistant
 
