@@ -80,19 +80,31 @@ When the panel opens, the conversation stays on the left and the recommendation 
 
 `Muse` can handle casual greetings and small talk, so the interaction starts like a normal assistant rather than a rigid search form.
 
-### 4. Text-based product recommendation updates the product rail
+### 4. Sample prompts help the user get started quickly
+
+![Samples for Asking](docs/sample-prompts.png)
+
+The assistant opens with a few example prompts so first-time users do not need to guess what kinds of requests work well.
+
+### 5. Following a sample prompt updates the recommendation rail
+
+![Follow the sample](docs/sample-prompt-result.png)
+
+Clicking one of the suggested prompts immediately turns the assistant into a shopping flow and updates the product rail with relevant catalog matches.
+
+### 6. Text-based product recommendation updates the product rail
 
 ![Text-based product recommendation](docs/text-based-product-recommendation.png)
 
 When the user makes a shopping request, the recommendation rail updates to reflect the latest shopping intent instead of changing on every conversational message.
 
-### 5. Image upload is visible inside the chat flow
+### 7. Image upload is visible inside the chat flow
 
 ![Upload a Shirt](docs/upload-a-shirt.png)
 
 The uploaded reference image is shown directly in the conversation so the user can see exactly what the assistant is using before submitting the request.
 
-### 6. Image-based product search updates recommendations
+### 8. Image-based product search updates recommendations
 
 ![Image-based product search](docs/image-based-product-search.png)
 
