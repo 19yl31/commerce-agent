@@ -96,7 +96,7 @@ Clicking one of the suggested prompts immediately turns the assistant into a sho
 
 ![Text-based product recommendation](docs/text-based-product-recommendation.png)
 
-When the user makes a shopping request, the recommendation rail updates to reflect the latest shopping intent instead of changing on every conversational message.
+When the user makes a shopping request, the recommendation rail updates to reflect the latest shopping intent.
 
 ### 7. Image upload is visible inside the chat flow
 
